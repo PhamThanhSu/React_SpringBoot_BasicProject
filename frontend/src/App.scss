@@ -1,0 +1,93 @@
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @media (min-width: 1400px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 1450px !important;
+    }
+}
+  .app-container{
+    .header-container{
+      position: fixed; // Giữ header cố định khi cuộn
+      top: 0; // Đặt header ở vị trí trên cùng
+      left: 0;
+      width: 100%; // Đảm bảo header chiếm toàn bộ chiều rộng trang
+      z-index: 10; // Đảm bảo header luôn nằm trên các phần tử khác
+      
+      .btn-login{
+        border-radius: 5px;
+        margin-right: 15px;
+        padding: 0 15px;
+        border: 1px solid #535353;
+        height: 40px;
+      }
+      .btn-signup{
+        border-radius: 5px;
+        margin-right: 15px;
+        padding: 0 15px;
+        background-color: black;
+        color: white;
+        height: 40px;
+        &:hover{
+          background: #303030;
+        }
+      }
+      .navbar{
+        padding-top: 20px;
+        z-index: 10;
+        background-color: rgba(0,0,0, 0) !important;
+        .nav-link{
+          &.active{
+            color: red;
+          } 
+        }
+      }
+    }
+    .main-container{
+      margin-top: 5%;
+    }
+    .homepage-container{  
+      display: flex;
+      .homepage-content{
+        width: 65%;
+        margin-top: 10%;
+        position: relative;
+        padding: 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        .hero-title{
+          font-size: 85px;
+        }
+        .hero-body{
+          font-size: 25px;
+        }
+        .btn-get{
+          font-size: 16px;
+          border-radius: 12px;
+          padding: 0 15px;
+          color: white;
+          height: 50px;
+          border-color: rgb(25, 25, 25);
+          background: rgb(25, 25, 25);
+          &:hover{
+            background-color: #535353;
+          }
+        }
+      }
+    }
+  }
+
+  video{
+    display: block;
+    z-index: 1; // Video nằm phía sau header
+    width: 45%; // Giữ nguyên kích thước thật của video
+    height: auto; // Đảm bảo giữ tỷ lệ video
+  }
