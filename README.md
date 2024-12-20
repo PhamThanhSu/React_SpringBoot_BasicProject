@@ -33,4 +33,4 @@ React Toastify: 9.0.7, Bootstrap: 5.3.3, Sass: ^1.79.4, Lodash: 4.17.21, React-B
 
 Để chạy ứng dụng React, sử dụng lệnh sau: npm start
 1. **Clone dự án về máy tính của bạn:**
-   git clone https://github.com/username/repository-name.git
+   git clone https://github.com/PhamThanhSu/React_SpringBoot_BasicProject.git
