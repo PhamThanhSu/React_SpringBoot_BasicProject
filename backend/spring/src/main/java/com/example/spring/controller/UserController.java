@@ -26,6 +26,7 @@ import com.example.spring.model.UserModel;
 import com.example.spring.response.ApiResponse;
 import com.example.spring.service.FileService;
 import com.example.spring.service.UserService;
+import com.exception.APIException;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -79,25 +80,19 @@ public class UserController {
             // Gọi service để tạo người dùng và tài khoản
             ApiResponse<UserModel> response = userService.createNewUser(userDTO, accountDTO);
 
-            // Nếu thành công, trả về 201 CREATED
-            if (response.getEC() == 0) {
-                return ResponseEntity.status(HttpStatus.CREATED).body(response);
-            }
+            // if (response.getEC() != 0) {
+            //     // Ném APIException khi có lỗi
+            //     throw new APIException(response.getEC(), response.getMessage(), response.getStatus(), response.getData());
+            // }
 
-            if (response.getStatus() == 400) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-            }
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
-            if (response.getStatus() == 409) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
-            }
-            // Trả về lỗi chung nếu có lỗi không mong muốn
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-
+        } catch (APIException e) {
+            System.out.println("response status: " + e.getEC());
+            return ResponseEntity.status(e.getStatus()).body(new ApiResponse<>(e.getStatus(), e.getMessage(), e.getEC(), null));
         } catch (Exception e) {
             // Trả về lỗi chung nếu có ngoại lệ không mong muốn
-            ApiResponse<UserModel> errorResponse = new ApiResponse<>(1, "Server error: " + e.getMessage(), 500);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<>(1, "Server error: " + e.getMessage(), 500));
         }
     }
 
@@ -154,27 +149,17 @@ public class UserController {
 
             // Gọi service để cập nhật người dùng
             ApiResponse<UserModel> response = userService.updateUser(userid, userDTO, accountDTO);
-            System.out.println("response" + response.getStatus());
-            // Trả về response phù hợp
-            if (response.getEC() == 0) {
-                return ResponseEntity.status(HttpStatus.OK).body(response);
-            }
+            // System.out.println("response" + response.getStatus());
+            // // Trả về response phù hợp
+            // if (response.getEC() != 0) {
+            //     throw new APIException(response.getStatus(), response.getMessage(), response.getEC(), response.getData());
+            // }
 
-            if (response.getStatus() == 400) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-            }
+            return ResponseEntity.status(HttpStatus.OK).body(response);
 
-            if (response.getStatus() == 404) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-            }
-
-            if (response.getStatus() == 409) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
-            }
-
-            // Trả về lỗi chung nếu có lỗi không mong muốn
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-
+        } catch (APIException e) {
+            return ResponseEntity.status(e.getStatus())
+                    .body(new ApiResponse<>(e.getStatus(), e.getMessage(), e.getEC(), null));
         } catch (Exception e) {
             ApiResponse<UserModel> errorResponse = new ApiResponse<>(1, "Server error: " + e.getMessage(), 500);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
@@ -187,24 +172,33 @@ public class UserController {
         try {
             ApiResponse<UserModel> response = userService.deleteUser(userid);
 
-            if (response.getEC() == 0) {
-                return ResponseEntity.ok(response); // Trả về OK nếu xóa thành công
-            }
+            // if (response.getEC() != 0) {
+            //     throw new APIException(response.getStatus(), response.getMessage(), response.getEC(), response.getData());
+            // }
 
-            if (response.getStatus() == 404) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response); // Trả về lỗi nếu không tìm thấy người dùng
-            }
+            // if (response.getEC() == 0) {
+            //     return ResponseEntity.ok(response); // Trả về OK nếu xóa thành công
+            // }
 
-            // Trả về mã trạng thái lỗi 400 (Bad Request)
-            if (response.getStatus() == 400) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-            }
+            // if (response.getStatus() == 404) {
+            //     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response); // Trả về lỗi nếu không tìm thấy
+            //                                                                        // người dùng
+            // }
+
+            // // Trả về mã trạng thái lỗi 400 (Bad Request)
+            // if (response.getStatus() == 400) {
+            //     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            // }
 
             return ResponseEntity.status(HttpStatus.CREATED).body(response); // Trả về lỗi hệ thống nếu có sự cố
 
+        } catch (APIException e) {
+            return ResponseEntity.status(e.getStatus())
+                    .body(new ApiResponse<>(e.getStatus(), e.getMessage(), e.getEC(), null));
         } catch (Exception e) {
             ApiResponse<UserModel> errorResponse = new ApiResponse<>(1, "Server error: " + e.getMessage(), 500);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse); // Trả về lỗi server nếu có lỗi
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse); // Trả về lỗi server nếu
+                                                                                                // có lỗi
         }
     }
 

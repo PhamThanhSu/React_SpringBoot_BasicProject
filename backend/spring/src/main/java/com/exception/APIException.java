@@ -1,33 +1,37 @@
-package com.example.spring.response;
+package com.exception;
 
-public class ApiResponse<T> {
+public class APIException extends RuntimeException {
     private int status;
     private String message;
     private int EC;
-    private T data;
+    private Object data; // Đổi thành Object để chứa bất kỳ kiểu dữ liệu nào
 
-    public ApiResponse() {
+    // Constructor mặc định
+    public APIException() {
     }
 
-    public ApiResponse(int status, String message, int EC, T data) {
+    // Constructor với tất cả các tham số
+    public APIException(int status, String message, int EC, Object data) {
         this.status = status;
         this.message = message;
         this.EC = EC;
         this.data = data;
     }
 
-    public ApiResponse(int EC, String message, int status) {
+    // Constructor với EC, message và status
+    public APIException(int EC, String message, int status) {
         this.EC = EC;
         this.status = status;
         this.message = message;
     }
 
-    public ApiResponse(int EC, String message) {
+    // Constructor với EC và message
+    public APIException(int EC, String message) {
         this.EC = EC;
         this.message = message;
     }
 
-    // Getters và Setters
+    // Getter và Setter
     public int getStatus() {
         return status;
     }
@@ -52,11 +56,11 @@ public class ApiResponse<T> {
         this.EC = EC;
     }
 
-    public T getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(Object data) {
         this.data = data;
     }
 }
