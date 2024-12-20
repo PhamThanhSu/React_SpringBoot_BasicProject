@@ -1,4 +1,4 @@
-package com.exception;
+package com.example.spring.exception;
 
 public class APIException extends RuntimeException {
     private int status;

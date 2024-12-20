@@ -11,8 +11,7 @@ import com.example.spring.model.UserModel;
 import com.example.spring.repository.AccountRepository;
 import com.example.spring.repository.UserRepository;
 import com.example.spring.response.ApiResponse;
-import com.exception.APIException;
-
+import com.example.spring.exception.APIException;
 import jakarta.transaction.Transactional;
 
 @Service

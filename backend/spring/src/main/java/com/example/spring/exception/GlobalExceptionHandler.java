@@ -1,4 +1,4 @@
-package com.exception;
+package com.example.spring.exception;
 
 import com.example.spring.response.ApiResponse;
 import org.springframework.http.HttpStatus;
