@@ -17,20 +17,20 @@ Dự án này bắt đầu với **Spring Boot** và **React**, bao gồm các c
 
 1. **Di chuyển vào thư mục backend:**
 
-   ```bash
+
    cd backend/spring
-   ```bash
+
    Cài đặt file pom.xml với Spring JPA, Spring web, lombok,...
 
 ### Cài đặt React
-```bash
+
 cd frontend
-```bash
+
 Sau khi vào thư mục frontend, bạn chỉ cần chạy lệnh sau để cài đặt tất cả các thư viện cần thiết được liệt kê trong package.json: npm install
-```bash
+
 Các thư viện đã cài đặt: React & React-DOM: 18.2.0, Redux: 4.2.0, React-Redux: 8.0.1, Axios: 0.27.2, React Router DOM: 6.26.2,
 React Toastify: 9.0.7, Bootstrap: 5.3.3, Sass: ^1.79.4, Lodash: 4.17.21, React-Bootstrap: 2.10.5
-```bash
+
 Để chạy ứng dụng React, sử dụng lệnh sau: npm start
 1. **Clone dự án về máy tính của bạn:**
    git clone https://github.com/username/repository-name.git
